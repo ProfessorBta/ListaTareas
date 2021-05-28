@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+}
+
+table,th,td{
+    border: 2px solid purple;
+    padding: 5px;
+}
+
+table{
+    border-collapse: collapse;
+}
+section{
+    padding-top: 10px;
+}
+
+input[type=text], input[type=submit], input[type=reset], textarea, select{
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid purple;
+}
