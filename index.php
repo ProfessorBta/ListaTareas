@@ -14,7 +14,7 @@
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" autocomplete="off">
         <label for="tarea">Tarea</label>
         <div>
-            <input type="text" name="tarea" value="<?php if(isset($_SESSION['tarea'])){echo $_SESSION['tarea'];} ?>">
+            <input type="text" name="tarea" value="<?php if(isset($_SESSION['tarea'])){echo $_SESSION['tarea'];} ?>" required>
         </div>
         <label for="descripcion">Descripción</label>
         <div>
@@ -22,8 +22,8 @@
         </div>
         <label for="estado">Estado</label>
         <div>
-            <select name="estado">
-                <option > Selecciona una opción</option>
+            <select name="estado" required>
+                <option value=""> Selecciona una opción</option>
                 <option value="0" <?php echo (isset($_SESSION['estado']) && $_SESSION['estado'] == 0) ? 'selected': ' ' ?> >En Progreso</option>
                 <option value="1" <?php echo (isset($_SESSION['estado']) && $_SESSION['estado'] == 1) ? 'selected': ' ' ?> >Finalizado</option>
             </select>
@@ -50,7 +50,7 @@
                 $_SESSION['mensaje'] = $mensaje;
 
                 $id = $_POST['id'];
-                $sql = "SELECT * FROM lista WHERE id='$id'";
+                $sql = "SELECT * FROM tareas WHERE id='$id'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -78,7 +78,7 @@
                 echo "Eliminando la tarea con el ID: ".$_POST['id'];
                 $id = $_POST['id'];
 
-                $sql = "DELETE FROM lista WHERE id='$id'";
+                $sql = "DELETE FROM tareas WHERE id='$id'";
 
                 if ($conn->query($sql) === TRUE) {
                 echo "<br>Tarea eliminada correctamente";
@@ -107,7 +107,7 @@
                     */
                     $id = $_POST['id'];
 
-                    $sql = "UPDATE lista SET tarea='$tarea', descripcion='$descripcion', estado='$estado' WHERE id=$id";
+                    $sql = "UPDATE tareas SET tarea='$tarea', descripcion='$descripcion', estado='$estado' WHERE id=$id";
 
                     if ($conn->query($sql) === TRUE) {
                     echo "Tarea actualizada correctamente";
@@ -119,7 +119,7 @@
                     /**  
                     Insertar 
                     */
-                    $sql = "INSERT INTO lista (tarea, descripcion, estado) VALUES ('$tarea', '$descripcion', $estado)";
+                    $sql = "INSERT INTO tareas (tarea, descripcion, estado) VALUES ('$tarea', '$descripcion', $estado)";
             
                     if ($conn->query($sql) === TRUE) {
                         echo "Tarea agregada correctamente";
@@ -155,7 +155,7 @@
             <tbody>
                 <?php
                 
-                $sql = "SELECT * FROM lista";
+                $sql = "SELECT * FROM tareas";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
